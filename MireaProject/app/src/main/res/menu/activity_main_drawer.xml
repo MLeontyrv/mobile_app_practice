@@ -24,5 +24,21 @@
             android:id="@+id/nav_web"
             android:icon="@mipmap/ic_launcher_round"
             android:title="Web" />
+        <item
+            android:id="@+id/BackgroundTask"
+            android:icon="@mipmap/ic_launcher_round"
+            android:title="BackgroundTask" />
+        <item
+            android:id="@+id/SensorFragment"
+            android:icon="@android:drawable/arrow_down_float"
+            android:title="SensorFragment" />
+        <item
+            android:id="@+id/CameraFragment"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="CameraFragment" />
+        <item
+            android:id="@+id/MicrophoneFragment"
+            android:icon="@android:drawable/ic_btn_speak_now"
+            android:title="MicrophoneFragment" />
     </group>
 </menu>

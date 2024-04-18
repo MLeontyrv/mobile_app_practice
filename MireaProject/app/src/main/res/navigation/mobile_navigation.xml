@@ -32,4 +32,24 @@
         android:name="ru.mirea.leontyevme.mireaproject.WebzViewFragment"
         android:label="fragment_web_view"
         tools:layout="@layout/fragment_webz_view" />
+    <fragment
+        android:id="@+id/BackgroundTask"
+        android:name="ru.mirea.leontyevme.mireaproject.BackgroundTask"
+        android:label="fragment_background_activity"
+        tools:layout="@layout/fragment_background_task" />
+    <fragment
+        android:id="@+id/SensorFragment"
+        android:name="ru.mirea.leontyevme.mireaproject.SensorFragment"
+        android:label="fragment_sensor"
+        tools:layout="@layout/fragment_sensor" />
+    <fragment
+        android:id="@+id/CameraFragment"
+        android:name="ru.mirea.leontyevme.mireaproject.CameraFragment"
+        android:label="fragment_camera"
+        tools:layout="@layout/fragment_camera" />
+    <fragment
+        android:id="@+id/MicrophoneFragment"
+        android:name="ru.mirea.leontyevme.mireaproject.MicrophoneFragment"
+        android:label="fragment_microphone"
+        tools:layout="@layout/fragment_microphone" />
 </navigation>
