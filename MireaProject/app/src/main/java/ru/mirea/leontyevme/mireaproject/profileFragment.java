@@ -1,5 +1,7 @@
 package ru.mirea.leontyevme.mireaproject;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +9,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,7 +63,47 @@ public class profileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        SharedPreferences preferences = getActivity().getSharedPreferences("mirea_settings",
+                Context.MODE_PRIVATE);
+        EditText name = view.findViewById(R.id.name);
+        EditText surname = view.findViewById(R.id.surname);
+        EditText secondName = view.findViewById(R.id.secondName);
+        EditText email = view.findViewById(R.id.email);
+
+        name.setText(preferences.getString("name", ""));
+        surname.setText(preferences.getString("surname", ""));
+        secondName.setText(preferences.getString("secondName", ""));
+        email.setText(preferences.getString("email", ""));
+
+        Button button = view.findViewById(R.id.saveButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPref = getActivity()
+                        .getSharedPreferences("mirea_settings",	Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor	= sharedPref.edit();
+
+                EditText name = view.findViewById(R.id.name);
+                String nameS = name.getText().toString();
+                EditText surname = view.findViewById(R.id.surname);
+                String surnameS = surname.getText().toString();
+                EditText secondName = view.findViewById(R.id.secondName);
+                String secondNameS = secondName.getText().toString();
+                EditText email = view.findViewById(R.id.email);
+                String emailS = email.getText().toString();
+
+                editor.putString("name", nameS);
+                editor.putString("surname", surnameS);
+                editor.putString("secondName", secondNameS);
+                editor.putString("email", emailS);
+
+                Toast.makeText(getContext(), "Профиль сохранен", Toast.LENGTH_SHORT).show();
+                editor.apply();
+            }
+        });
+
+        return view;
     }
 }

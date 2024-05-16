@@ -1,12 +1,30 @@
 package ru.mirea.leontyevme.mireaproject;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,7 +32,8 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class fileWorkFragment extends Fragment {
-
+    private ImageView imageView;
+    private Spinner spinnerImageFormat;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -59,6 +78,62 @@ public class fileWorkFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_file_work, container, false);
+        View view = inflater.inflate(R.layout.fragment_file_work, container, false);
+
+        imageView = view.findViewById(R.id.imageView1);
+        FloatingActionButton buttonLoadImage = view.findViewById(R.id.floatingActionButton);
+        buttonLoadImage.setOnClickListener(v -> selectImage());
+
+        spinnerImageFormat = view.findViewById(R.id.spinner);
+        Button buttonConvertImage = view.findViewById(R.id.buttonConvertImage);
+        buttonConvertImage.setOnClickListener(v -> convertAndSaveImage());
+        return view;
+    }
+
+    private void selectImage() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, 100);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100 && resultCode == Activity.RESULT_OK && data != null) {
+            Uri imageUri = data.getData();
+            imageView.setImageURI(imageUri);
+        }
+    }
+
+    private void convertAndSaveImage() {
+        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+        Bitmap.CompressFormat format = getFormat(spinnerImageFormat.getSelectedItem().toString());
+        try {
+            File file = new File(getActivity().getExternalFilesDir(null),
+                    "cat_" + System.currentTimeMillis() + getExtension(format));
+            try (FileOutputStream out = new FileOutputStream(file)) {
+                bitmap.compress(format, 100, out);
+                Toast.makeText(getActivity(), "Изображение сохранено в "+ format, Toast.LENGTH_SHORT).show();
+            }
+        } catch (IOException e) {
+            Toast.makeText(getActivity(), "Ошибка при сохранении", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private Bitmap.CompressFormat getFormat(String format) {
+        switch (format) {
+            case "JPEG": return Bitmap.CompressFormat.JPEG;
+            case "PNG": return Bitmap.CompressFormat.PNG;
+            case "WEBP": return Bitmap.CompressFormat.WEBP;
+            default: return Bitmap.CompressFormat.JPEG;
+        }
+    }
+
+    private String getExtension(Bitmap.CompressFormat format) {
+        switch (format) {
+            case JPEG: return ".jpg";
+            case PNG: return ".png";
+            case WEBP: return ".webp";
+            default: return ".jpg";
+        }
     }
 }
