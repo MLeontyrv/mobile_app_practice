@@ -41,12 +41,16 @@
             android:icon="@android:drawable/ic_btn_speak_now"
             android:title="MicrophoneFragment" />
         <item
-            android:id="@+id/profileFragment"
+            android:id="@+id/ProfileFragment"
             android:icon="@android:drawable/ic_menu_myplaces"
-            android:title="profileFragment" />
+            android:title="ProfileFragment" />
         <item
-            android:id="@+id/fileWorkFragment"
+            android:id="@+id/FileWorkFragment"
             android:icon="@android:drawable/ic_dialog_dialer"
-            android:title="fileWorkFragment" />
+            android:title="FileWorkFragment" />
+        <item
+            android:id="@+id/NetworkResourceFragment"
+            android:icon="@drawable/googleg_standard_color_18"
+            android:title="NetworkResourceFragment" />
     </group>
 </menu>

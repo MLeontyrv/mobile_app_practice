@@ -14,64 +14,72 @@
             android:id="@+id/imageView1"
             android:layout_width="225dp"
             android:layout_height="178dp"
-            android:layout_marginStart="76dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="72dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
 
         <Spinner
             android:id="@+id/spinner"
-            android:layout_width="406dp"
-            android:layout_height="67dp"
-            android:layout_marginTop="468dp"
+            android:layout_width="337dp"
+            android:layout_height="69dp"
+            android:layout_marginTop="388dp"
+            android:layout_marginBottom="43dp"
+            android:entries="@array/image_formats"
+            app:layout_constraintBottom_toTopOf="@+id/buttonConvertImage"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView16"
-            android:layout_width="348dp"
-            android:layout_height="63dp"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="396dp"
-            android:text="Выберите формат для конвертации:"
+            android:layout_width="330dp"
+            android:layout_height="31dp"
+            android:layout_marginTop="332dp"
+            android:text="Формат:"
             android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/spinner"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/buttonConvertImage"
-            android:layout_width="337dp"
-            android:layout_height="58dp"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="556dp"
-            android:text="Конвертировать и сохранить"
+            android:layout_width="292dp"
+            android:layout_height="54dp"
+            android:backgroundTint="#009688"
+            android:text="Конвертировать"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView1" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
-            android:layout_width="117dp"
-            android:layout_height="92dp"
-            android:layout_marginStart="140dp"
-            android:layout_marginTop="296dp"
-            android:clickable="true"
-            android:src="@android:drawable/alert_dark_frame"
+        <Button
+            android:id="@+id/buttonLoadImage"
+            android:layout_width="271dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="9dp"
+            android:backgroundTint="#3F8C42"
+            android:text="Загрузить изображение"
+            android:textColor="#FBE3E3"
+            app:layout_constraintBottom_toTopOf="@+id/textView16"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView1"
+            app:layout_constraintVertical_bias="0.32" />
 
         <TextView
-            android:id="@+id/textView17"
-            android:layout_width="249dp"
-            android:layout_height="51dp"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="236dp"
-            android:text="Загрузить изображение:"
-            android:textSize="20sp"
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ваше изображение:"
+            app:layout_constraintBottom_toTopOf="@+id/imageView1"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.811" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Objects;
 
 
 /**
@@ -81,7 +83,7 @@ public class fileWorkFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_file_work, container, false);
 
         imageView = view.findViewById(R.id.imageView1);
-        FloatingActionButton buttonLoadImage = view.findViewById(R.id.floatingActionButton);
+        Button buttonLoadImage = view.findViewById(R.id.buttonLoadImage);
         buttonLoadImage.setOnClickListener(v -> selectImage());
 
         spinnerImageFormat = view.findViewById(R.id.spinner);
@@ -108,13 +110,16 @@ public class fileWorkFragment extends Fragment {
         Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
         Bitmap.CompressFormat format = getFormat(spinnerImageFormat.getSelectedItem().toString());
         try {
-            File file = new File(getActivity().getExternalFilesDir(null),
-                    "cat_" + System.currentTimeMillis() + getExtension(format));
+            File file = new File(getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+                    System.currentTimeMillis() + getExtension(format));
             try (FileOutputStream out = new FileOutputStream(file)) {
                 bitmap.compress(format, 100, out);
                 Toast.makeText(getActivity(), "Изображение сохранено в "+ format, Toast.LENGTH_SHORT).show();
             }
-        } catch (IOException e) {
+            catch (IOException e) {
+                Toast.makeText(getActivity(), "Ошибка при сохранении", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
             Toast.makeText(getActivity(), "Ошибка при сохранении", Toast.LENGTH_SHORT).show();
         }
     }
