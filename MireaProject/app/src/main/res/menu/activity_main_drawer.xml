@@ -52,5 +52,8 @@
             android:id="@+id/NetworkResourceFragment"
             android:icon="@drawable/googleg_standard_color_18"
             android:title="NetworkResourceFragment" />
+        <item
+            android:id="@+id/MapFragment"
+            android:title="Заведения" />
     </group>
 </menu>

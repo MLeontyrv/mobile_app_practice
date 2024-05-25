@@ -67,4 +67,9 @@
         android:name="ru.mirea.leontyevme.mireaproject.NetworkResourceFragment"
         android:label="fragment_network_resource"
         tools:layout="@layout/fragment_network_resource" />
+    <fragment
+        android:id="@+id/MapFragment"
+        android:name="ru.mirea.leontyevme.mireaproject.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" />
 </navigation>
